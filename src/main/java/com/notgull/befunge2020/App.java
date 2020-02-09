@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-package befunge2020;
+package com.notgull.befunge2020;
 
 public class App {
     public static void main(String[] args) {
