@@ -50,15 +50,48 @@ public class Parser {
     return y;
   }
 
+  // move in a certain direction
+  private void moveDirection() {
+    switch (this.direction) {
+      case Up:
+        this.y -= 1;
+        break;
+      case Down:
+        this.y += 1;
+        break;
+      case Left:
+        this.x -= 1;
+        break;
+      case Right:
+        this.x += 1;
+        break;
+    }
+  }
+
   public boolean readInstruction() throws Exception {
     // read at current x and y
     char instruction = grid[y][x];
     switch (instruction) {
       case '@':
         return false;
+      case '>':
+        this.direction = Direction.Right;
+        break;
+      case 'v':
+        this.direction = Direction.Down;
+        break;
+      case '<':
+        this.direction = Direction.Left;
+        break;
+      case '^':
+        this.direction = Direction.Up;
+        break;
       default:
         throw new Exception("Invalid");
     }
-    //return true;
+
+    moveDirection();
+
+    return true;
   }
 }
