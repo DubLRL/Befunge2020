@@ -10,7 +10,7 @@ import java.util.List;
 public class Grid {
     protected int x, x1;
     protected int y, y1;
-    protected String[][] grid;
+    protected char[][] grid;
     public Grid(String fileName, int x, int y){
         //get size of the array fileName and pass into grid
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(fileName))) {
@@ -26,7 +26,7 @@ public class Grid {
         } catch (IOException ex) {
             System.err.println("An error occurred with the file you passed in.");
         }
-        grid = new String[x1/y1][y1];
+        grid = new char[x1/y1][y1];
         this.x = x;
         this.y = y;
     }
