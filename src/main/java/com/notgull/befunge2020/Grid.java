@@ -42,4 +42,14 @@ public class Grid {
     public int getY(){
         return this.y;
     }
+    public String toString(){
+        String g = "";
+        for (int x = 0; x < grid.length; x++){
+            for (int y = 0; y < grid[x].length; y++){
+                g += grid[x][y];
+            }
+            g += "\n";
+        }
+        return g;
+    }
 }
