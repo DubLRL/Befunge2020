@@ -88,4 +88,16 @@ public class Grid {
         }
         return g;
     }
+
+    public char getChar(int x, int y) {
+        return grid[y][x];
+    }
+
+    public int getRowCount() {
+        return grid.length;
+    }
+
+    public int getColsAt(int y) {
+        return grid[y].length;
+    }
 }

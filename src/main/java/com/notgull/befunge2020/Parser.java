@@ -28,14 +28,14 @@ package com.notgull.befunge2020;
 import java.util.Stack;
 
 public class Parser {
-  private Character[][] grid;
+  private Grid grid;
   private int x;
   private int y;
   private Direction direction;
   private Stack<Object> stack;
   private ParserState state;
 
-  public Parser(Character[][] grid) {
+  public Parser(Grid grid) {
     this.grid = grid;
     this.x = 0;
     this.y = 0;
@@ -44,7 +44,7 @@ public class Parser {
     this.state = ParserState.Searching;
   }
 
-  public Character[][] getGrid() {
+  public Grid getGrid() {
     return grid;
   }
 
@@ -75,16 +75,16 @@ public class Parser {
   }
 
   public boolean readInstruction() throws Exception {
-    if (y >= grid.length) {
+    if (y >= grid.getRowCount()) {
       throw new Exception("Out of bounds");
     }
 
-    if (x >= grid[y].length) {
+    if (x >= grid.getColsAt(y)) {
       throw new Exception("Out of bounds");
     }
 
     // read at current x and y
-    char instruction = grid[y][x];
+    char instruction = grid.getChar(x, y);
     boolean foundOp = true;
     switch (instruction) {
       case '@':
