@@ -6,8 +6,15 @@
 trigger:
 - master
 
+strategy:
+  matrix:
+    Linux:
+      vmImage: ubuntu-18.04
+    Windows:
+      vmImage: vs2017-win2016
+
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: $(vmImage)
 
 steps:
 - task: Maven@3
