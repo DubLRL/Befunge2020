@@ -25,8 +25,40 @@
 
 package com.notgull.befunge2020;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        System.out.println("Befunge...");
+        List<List<Character>> grid = new ArrayList<>();
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(args[1]))) {
+            while (true) {
+                String line = reader.readLine();
+                if (line == null) break;
+                List<Character> l = new ArrayList<>();
+                for (int i = 0; i < line.length(); i++) {
+                    l.add(line.charAt(i));
+                }
+                grid.add(l);
+            }
+        } catch (IOException ex) {
+            System.err.println("An error occurred.");
+        }
+
+        Character[][] actualGrid = new Character[grid.size()][];
+        for (int i = 0; i < grid.size(); i++) {
+            List<Character> l = grid.get(i);
+            Character[] gridRow = new Character[l.size()];
+            l.toArray(gridRow);
+            actualGrid[i] = gridRow;
+        }
+
+        Parser parser = new Parser(actualGrid);
     }
 }
