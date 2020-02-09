@@ -34,10 +34,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Befunge...");
+    public static void main(String[] args) throws Exception {
+        System.out.println("Befunge 2020...");
         List<List<Character>> grid = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(args[1]))) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(args[0]))) {
             while (true) {
                 String line = reader.readLine();
                 if (line == null) break;
@@ -60,5 +60,6 @@ public class App {
         }
 
         Parser parser = new Parser(actualGrid);
+        while (parser.readInstruction());
     }
 }
