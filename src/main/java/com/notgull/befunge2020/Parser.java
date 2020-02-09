@@ -69,6 +69,14 @@ public class Parser {
   }
 
   public boolean readInstruction() throws Exception {
+    if (y >= grid.length) {
+      throw new Exception("Out of bounds");
+    }
+
+    if (x >= grid[y].length) {
+      throw new Exception("Out of bounds");
+    }
+
     // read at current x and y
     char instruction = grid[y][x];
     switch (instruction) {
@@ -85,6 +93,8 @@ public class Parser {
         break;
       case '^':
         this.direction = Direction.Up;
+        break;
+      case ' ':
         break;
       default:
         throw new Exception("Invalid");
