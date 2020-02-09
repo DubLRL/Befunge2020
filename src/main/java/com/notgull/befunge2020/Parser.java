@@ -33,6 +33,7 @@ public class Parser {
   private int y;
   private Direction direction;
   private Stack<Object> stack;
+  private ParserState state;
 
   public Parser(Character[][] grid) {
     this.grid = grid;
@@ -40,6 +41,7 @@ public class Parser {
     this.y = 0;
     this.direction = Direction.Right;
     this.stack = new Stack<>();
+    this.state = ParserState.Searching;
   }
 
   public Character[][] getGrid() {
@@ -83,6 +85,7 @@ public class Parser {
 
     // read at current x and y
     char instruction = grid[y][x];
+    boolean foundOp = true;
     switch (instruction) {
       case '@':
         return false;
@@ -100,38 +103,47 @@ public class Parser {
         break;
       case ' ':
         break;
-      case '0':
-        stack.add(0);
-        break;
-      case '1':
-        stack.add(1);
-        break;
-      case '2':
-        stack.add(2);
-        break;
-      case '3':
-        stack.add(3);
-        break;
-      case '4':
-        stack.add(4);
-        break;
-      case '5':
-        stack.add(5);
-        break;
-      case '6':
-        stack.add(6);
-        break;
-      case '7':
-        stack.add(7);
-        break;
-      case '8':
-        stack.add(8);
-        break;
-      case '9':
-        stack.add(9);
-        break;
       default:
-        throw new Exception("Invalid");
+        foundOp = false;
+    }
+
+    if (!foundOp) {
+      if (this.state == ParserState.Searching) {
+        switch (instruction) {
+          case '0':
+            stack.add(0);
+            break;
+          case '1':
+            stack.add(1);
+            break;
+          case '2':
+            stack.add(2);
+            break;
+          case '3':
+            stack.add(3);
+            break;
+          case '4':
+            stack.add(4);
+            break;
+          case '5':
+            stack.add(5);
+            break;
+          case '6':
+            stack.add(6);
+            break;
+          case '7':
+            stack.add(7);
+            break;
+          case '8':
+            stack.add(8);
+            break;
+          case '9':
+            stack.add(9);
+            break;
+          default:
+            throw new Exception("Invalid");
+        }
+      }
     }
 
     moveDirection();
