@@ -35,25 +35,36 @@ import java.util.List;
 public class Grid {
     protected int x, x1;
     protected int y, y1;
-    protected char[][] grid;
-    public Grid(String fileName, int x, int y){
+    protected Character[][] grid;
+    public Grid(String fileName){
         //get size of the array fileName and pass into grid
+        List<List<Character>> grid = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(fileName))) {
             while (true) {
                 String line = reader.readLine();
                 if (line == null) break;
-
+                List<Character> l = new ArrayList<>();
                 for (int i = 0; i < line.length(); i++) {
-                    x1 += 1;
+                    l.add(line.charAt(i));
                 }
-                y1 += 1;
+                grid.add(l);
             }
         } catch (IOException ex) {
-            System.err.println("An error occurred with the file you passed in.");
+            System.err.println("An error occurred.");
         }
-        grid = new char[x1/y1][y1];
-        this.x = x;
-        this.y = y;
+
+        Character[][] actualGrid = new Character[grid.size()][];
+        for (int i = 0; i < grid.size(); i++) {
+            List<Character> l = grid.get(i);
+            Character[] gridRow = new Character[l.size()];
+            l.toArray(gridRow);
+            actualGrid[i] = gridRow;
+        }
+
+        this.grid = actualGrid;
+
+        this.x = 0;
+        this.y = 0;
     }
     protected void setX(int x){
         this.x = x;
