@@ -36,30 +36,9 @@ import java.util.List;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Go Befunge Your 2020 ass...");
-        List<List<Character>> grid = new ArrayList<>();
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(args[0]))) {
-            while (true) {
-                String line = reader.readLine();
-                if (line == null) break;
-                List<Character> l = new ArrayList<>();
-                for (int i = 0; i < line.length(); i++) {
-                    l.add(line.charAt(i));
-                }
-                grid.add(l);
-            }
-        } catch (IOException ex) {
-            System.err.println("An error occurred.");
-        }
+        Grid grid = new Grid(args[0]);
+        Parser parser = new Parser(grid);
 
-        Character[][] actualGrid = new Character[grid.size()][];
-        for (int i = 0; i < grid.size(); i++) {
-            List<Character> l = grid.get(i);
-            Character[] gridRow = new Character[l.size()];
-            l.toArray(gridRow);
-            actualGrid[i] = gridRow;
-        }
-
-        Parser parser = new Parser(actualGrid);
         while (parser.readInstruction());
     }
 }
