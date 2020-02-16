@@ -35,7 +35,7 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Befunge 2020...");
+        System.out.println("Go Befunge Your 2020 ass...");
         List<List<Character>> grid = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(args[0]))) {
             while (true) {
